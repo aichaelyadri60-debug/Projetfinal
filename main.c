@@ -10,7 +10,8 @@ struct clients{
     float solde ;
 };
 struct clients client[1];
-int nextid = 0;
+
+
 struct Produits {
     int idproduit ;
     char nomP[50];
@@ -40,14 +41,14 @@ int nbproduits=10;
 
 void afficherProduits(){
     for(int i=0;i<nbproduits;i++){
-        printf("-----------------produit %d ----------------\n",i+1);
-        printf("| ID          :%d.                         |\n",produit[i].idproduit);
-        printf("| NOM         :%s.                         |\n",produit[i].nomP);
-        printf("| CATEGORIE   :%s.                         |\n",produit[i].categorie);
-        printf("| PRIX        :%.2f DH.                    |\n",produit[i].prix);
-        printf("| STOCK       : %d.                        |\n",produit[i].stock);
-        printf("| DESCRIPTION :%s.                         |\n",produit[i].description);
-        printf("-------------------------------------------\n");
+        printf("-----------------------produit %d -------------------------\n",i+1);
+        printf(" ID          :%d.\n",produit[i].idproduit);
+        printf(" NOM         :%s.      \n",produit[i].nomP);
+        printf(" CATEGORIE   :%s.      \n",produit[i].categorie);
+        printf(" PRIX        :%.2f DH. \n",produit[i].prix);
+        printf(" STOCK       : %d.     \n",produit[i].stock);
+        printf(" DESCRIPTION :%s.      \n",produit[i].description);
+        printf("----------------------------------------------------------\n");
     }
 }
 
@@ -169,10 +170,36 @@ void rechercheparid(){
 
 
 
+void ajoutclient(){
+    client[0].id=1;
+    printf("entrer le nom de cette client :");
+    scanf(" %[^\n]",client[0].nom);
+    printf("entrer prenom de cette client :");
+    scanf(" %[^\n]",client[0].prenom);
+    client[0].solde=0.0;
+    printf("client ajouter avec succes\n");
+}
+void afficherclient(){
+    printf("ID          :%d.\n",client[0].id);
+    printf("NOM         :%s.\n",client[0].nom);
+    printf("PRENOM      :%s.\n",client[0].prenom);
+    printf("email       :%s.%s@gmail.com.\n",client[0].prenom ,client[0].nom);
+    printf("SOLDE       :%d.\n",client[0].solde);
+}
+void modificationclient(){
+printf("Entrer nom :");
+scanf(" %[^\n]",client[0].nom);
+printf("Entrer prenom de :");
+scanf(" %[^\n]",client[0].prenom);
+}
+
+
+
+
 
 int main(){
-    // rechercheparid();
-    afficherProduits();
+
+
 }
 
 
