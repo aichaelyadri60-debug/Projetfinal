@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+#include "clients.h"
+#include "produits.h"
 
-
+struct clients client[1];
+struct Historiques historique[100];
+int nbhistorique = 0;
 
 void ajoutclient(){
     client[0].id=1;
@@ -14,11 +18,13 @@ void ajoutclient(){
     printf("client ajouter avec succes\n");
 }
 void afficherclient(){
+    printf("=========================================");
     printf("ID          :%d.\n",client[0].id);
     printf("NOM         :%s.\n",client[0].nom);
     printf("PRENOM      :%s.\n",client[0].prenom);
     printf("email       :%s\n",client[0].email);
     printf("SOLDE       :%.2f.\n",client[0].solde);
+    printf("=========================================");
 }
 void modificationclient(){
     printf("Entrer nom :");
@@ -29,8 +35,10 @@ void modificationclient(){
 }
 
 void affichesolde(){
-    printf("le client :%s %s",client[0].nom ,client[0].prenom);
-    printf("le solde disponible est : %.2f  .",client[0].solde);
+    printf("=========================================");
+    printf("le client :%s %s\n",client[0].nom ,client[0].prenom);
+    printf("le solde disponible est : %.2f  .\n",client[0].solde);
+    printf("=========================================");
 }
 
 
@@ -45,7 +53,6 @@ void Alimentationsolde(){
         printf("Montant invalide.\n");
     }
 }
-
 
 void acheter(){
     char nom[50];
@@ -75,5 +82,18 @@ void acheter(){
     }
     if(trouve != 1){
         printf("aucun produit avec cette nom .\n");
+    }
+}
+
+void historiquedetail(){
+    if(nbhistorique <=0 ){
+        printf("aucun achat effectue .\n");
+    }else{
+        for(int i=0;i<nbhistorique;i++){
+            printf("-----------------achat :  %d -------------------------\n",i+1);
+            printf("le nom de produits est :%s\n",historique[i].produit);
+            printf("le prix de cette produit est %.2f .\n",historique[i].prix);
+            printf("-------------------------------------------------------\n");
+        } 
     }
 }

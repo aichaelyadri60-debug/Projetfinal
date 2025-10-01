@@ -10,9 +10,8 @@ struct Produits {
     int stock ;
     char description[100];
 };
-
-
-int nbproduits=10;
+extern struct Produits produit[10];
+extern int nbproduits;
 
 void afficherProduits();
 void Rechercheparnom();

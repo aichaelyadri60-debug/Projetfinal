@@ -1,21 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
-struct Historiques{
-    char produit[100];
-    float prix ;
-
-};
-struct Historiques historique[100];
-int nbhistorique =0;
-struct Produits {
-    int idproduit ;
-    char nomP[50];
-    char categorie[50];
-    float prix;
-    int stock ;
-    char description[100];
-};
+#include "produits.h"
 
 
 
@@ -33,9 +18,16 @@ struct Produits produit[10]= {
     };
 int nbproduits=10;
 
-
-
 void afficherProduits(){
+    for(int i=0;i<nbproduits-1;i++){
+        for(int j=0;j<nbproduits-i-1;j++){
+            if(produit[j].idproduit>produit[j+1].idproduit){
+                struct Produits p=produit[j];
+                produit[j]=produit[j+1];
+                produit[j+1]=p;
+            }
+        }
+    }
     for(int i=0;i<nbproduits;i++){
         printf("-----------------------produit %d -------------------------\n",i+1);
         printf(" ID          :%d.\n",produit[i].idproduit);
@@ -47,7 +39,6 @@ void afficherProduits(){
         printf("----------------------------------------------------------\n");
     }
 }
-
 
 void Rechercheparnom(){
     char name[50];
@@ -72,8 +63,6 @@ void Rechercheparnom(){
     }
 }
 
-
-
 void disponibilite(){
     int disponible =0;
     int nondisponible =0;
@@ -88,19 +77,6 @@ void disponibilite(){
     printf("Les produits non disponible %d .\n",nondisponible);
 }
 
-void historiquedetail(){
-    if(nbhistorique <=0 ){
-        printf("aucun achat effectue .\n");
-    }else{
-        for(int i=0;i<nbhistorique;i++){
-            printf("-----------------achat :  %d -------------------------",i+1);
-            printf("le nom de produits est :%s",historique[i].produit);
-            printf("le prix de cette produit est %.2f .",historique[i].prix);
-        } 
-    }
-}
-
-
 void tricroissant(){
     for(int i=0;i<nbproduits-1;i++){
         for(int j=0;j<nbproduits-i-1;j++){
@@ -113,12 +89,14 @@ void tricroissant(){
     }
      printf("Produits tries par prix croissant avec succes .\n");
      for(int i=0;i<nbproduits;i++){
-          printf("ID          :%d.\n",produit[i].idproduit);
-          printf("NOM         :%s.\n",produit[i].nomP);
-          printf("CATEGORIE   :%s.\n",produit[i].categorie);
-          printf("PRIX        :%.2f DH.\n",produit[i].prix);
-          printf("STOCK       : %d.\n",produit[i].stock);
-          printf("DESCRIPTION :%s.\n",produit[i].description);
+        printf("==========================================\n");
+        printf("ID          :%d.\n",produit[i].idproduit);
+        printf("NOM         :%s.\n",produit[i].nomP);
+        printf("CATEGORIE   :%s.\n",produit[i].categorie);
+        printf("PRIX        :%.2f DH.\n",produit[i].prix);
+        printf("STOCK       : %d.\n",produit[i].stock);
+        printf("DESCRIPTION :%s.\n",produit[i].description);
+        printf("==========================================\n");
      }
 }
 
@@ -135,12 +113,15 @@ void tridecroissant(){
     }
     printf("les produits ties par ordre decroissant avec succes .\n");
          for(int i=0;i<nbproduits;i++){
-          printf("ID          :%d.\n",produit[i].idproduit);
-          printf("NOM         :%s.\n",produit[i].nomP);
-          printf("CATEGORIE   :%s.\n",produit[i].categorie);
-          printf("PRIX        :%.2f DH.\n",produit[i].prix);
-          printf("STOCK       : %d.\n",produit[i].stock);
-          printf("DESCRIPTION :%s.\n",produit[i].description);
+            printf("==========================================\n");
+            printf("ID          :%d.\n",produit[i].idproduit);
+            printf("NOM         :%s.\n",produit[i].nomP);
+            printf("CATEGORIE   :%s.\n",produit[i].categorie);
+            printf("PRIX        :%.2f DH.\n",produit[i].prix);
+            printf("STOCK       : %d.\n",produit[i].stock);
+            printf("DESCRIPTION :%s.\n",produit[i].description);
+            printf("=========================================\n");
+
      }
 
 }
@@ -157,12 +138,14 @@ void triparnom(){
     }
     printf("les produits tries par nom avec succes .\n");
     for(int i=0;i<nbproduits;i++){
+          printf("=========================================\n");
           printf("ID          :%d.\n",produit[i].idproduit);
           printf("NOM         :%s.\n",produit[i].nomP);
           printf("CATEGORIE   :%s.\n",produit[i].categorie);
           printf("PRIX        :%.2f DH.\n",produit[i].prix);
           printf("STOCK       : %d.\n",produit[i].stock);
           printf("DESCRIPTION :%s.\n",produit[i].description);
+          printf("=========================================\n");
      }
 }
 
@@ -174,12 +157,14 @@ void detailproduit(){
     scanf("%d",&nombre);
     for(int i=0 ;i<nbproduits;i++){
         if(produit[i].idproduit == nombre){
+          printf("=========================================");
           printf("ID          :%d.\n",produit[i].idproduit);
           printf("NOM         :%s.\n",produit[i].nomP);
           printf("CATEGORIE   :%s.\n",produit[i].categorie);
           printf("PRIX        :%.2f DH.\n",produit[i].prix);
           printf("STOCK       : %d.\n",produit[i].stock);
           printf("DESCRIPTION :%s.\n",produit[i].description);
+          printf("=========================================");
           trouve = 1;
           break;
         }
