@@ -11,6 +11,9 @@ struct clients{
 };
 struct clients client[1];
 
+struct Historiques{
+
+};
 
 struct Produits {
     int idproduit ;
@@ -104,7 +107,7 @@ void tridecroissant(){
         for(int j=0;j<nbproduits-i-1;j++){
             if(produit[j].prix<produit[j+1].prix){
                 struct Produits decroissant = produit[j];
-                produit[j+1]=produit[j];
+                produit[j]=produit[j+1];
                 produit[j+1]=decroissant;
             }
         }
@@ -129,7 +132,7 @@ void triparnom(){
             if(strcmp(produit[j].nomP,produit[j+1].nomP)>0){
                 struct Produits croissantnom =produit[j];
                 produit[j]=produit[j+1];
-                croissantnom =produit[j+1];
+                produit[j+1]=croissantnom ;
             }
         }
     }
@@ -184,7 +187,7 @@ void afficherclient(){
     printf("NOM         :%s.\n",client[0].nom);
     printf("PRENOM      :%s.\n",client[0].prenom);
     printf("email       :%s.%s@gmail.com.\n",client[0].prenom ,client[0].nom);
-    printf("SOLDE       :%d.\n",client[0].solde);
+    printf("SOLDE       :%.2f.\n",client[0].solde);
 }
 void modificationclient(){
 printf("Entrer nom :");
@@ -213,7 +216,7 @@ void Alimentationsolde(){
 }
 
 
-void achater(){
+void acheter(){
     char nom[50];
     int trouve =0;
     printf("entrer le nom de produit qui tu veux acheter :");
@@ -222,13 +225,13 @@ void achater(){
         if(strcmp(produit[i].nomP , nom)==0){
             trouve =1;
             if(produit[i].stock>0){
-                if(client[0].solde >produit[i].prix){
+                if(client[0].solde >=produit[i].prix){
                     client[0].solde -=produit[i].prix ;
                     produit[i].stock --;
-                    printf("achat avec succes\n");
+                    printf("achat avec succes .\n");
 
                 }else{
-                    printf("prix et superieur a votre solde\n");
+                    printf("prix et superieur a votre solde .\n");
                 }
             }else{
                 printf("le stock de cette produit et zero .\n");
