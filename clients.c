@@ -18,13 +18,13 @@ void ajoutclient(){
     printf("client ajouter avec succes\n");
 }
 void afficherclient(){
-    printf("=========================================");
+    printf("=========================================\n");
     printf("ID          :%d.\n",client[0].id);
     printf("NOM         :%s.\n",client[0].nom);
     printf("PRENOM      :%s.\n",client[0].prenom);
     printf("email       :%s\n",client[0].email);
     printf("SOLDE       :%.2f.\n",client[0].solde);
-    printf("=========================================");
+    printf("=========================================\n");
 }
 void modificationclient(){
     printf("Entrer nom :");
@@ -35,57 +35,76 @@ void modificationclient(){
 }
 
 void affichesolde(){
-    printf("=========================================");
-    printf("le client :%s %s\n",client[0].nom ,client[0].prenom);
-    printf("le solde disponible est : %.2f  .\n",client[0].solde);
-    printf("=========================================");
+    if(client[0].id<1){
+        printf("aucun client enregistrer .\n");
+    }else{
+        printf("=========================================\n");
+        printf("le client :%s %s\n",client[0].nom ,client[0].prenom);
+        printf("le solde disponible est : %.2f  .\n",client[0].solde);
+        printf("=========================================\n");
+
+    }
 }
 
 
 void Alimentationsolde(){
     float Montant ;
-    printf("entrer la valeur qui tu veux verser :");
-    scanf("%f",&Montant);
-    if(Montant>0){
-        client[0].solde +=Montant;
-        printf("Montant ajouter avec succes nouveau solde est %.2f \n.",client[0].solde);
+    if(client[0].id<1){
+        printf("aucun client enregistrer .\n");
     }else{
-        printf("Montant invalide.\n");
+        printf("entrer la valeur qui tu veux verser :");
+        scanf("%f",&Montant);
+        if(Montant>0){
+            client[0].solde +=Montant;
+            printf("Montant ajouter avec succes nouveau solde est %.2f \n",client[0].solde);
+        }else{
+            printf("Montant invalide\n");
+        }
     }
 }
 
 void acheter(){
     char nom[50];
+    int quantite ;
     int trouve =0;
-    printf("entrer le nom de produit qui tu veux acheter :");
-    scanf(" %[^\n]",nom);
-    for(int i=0;i<nbproduits;i++){
-        if(strcmp(produit[i].nomP , nom)==0){
-            trouve =1;
-            if(produit[i].stock>0){
-                if(client[0].solde >=produit[i].prix){
-                    client[0].solde -=produit[i].prix ;
-                    produit[i].stock --;
-                    strcpy(historique[nbhistorique].produit ,produit[i].nomP);
-                    historique[nbhistorique].prix =produit[i].prix;
-                    nbhistorique++;
-                    printf("achat avec succes .\n");
-
+    if(client[0].id<1){
+        printf("aucun client enregistrer .\n");
+    }else{
+        printf("entrer le nom de produit qui tu veux acheter :");
+        scanf(" %[^\n]",nom);
+        printf("quanbien des produits tu veux :");
+        scanf("%d",&quantite);
+        for(int i=0;i<nbproduits;i++){
+            if(strcmp(produit[i].nomP , nom)==0){
+                trouve =1;
+                if(produit[i].stock >= quantite){
+                    float prixtotal =produit[i].prix * quantite;
+                    if(client[0].solde >=produit[i].prix * quantite){
+                        client[0].solde -= prixtotal ;
+                        produit[i].stock -= quantite;
+                        strcpy(historique[nbhistorique].produit ,produit[i].nomP);
+                        historique[nbhistorique].prix =prixtotal;
+                        nbhistorique++;
+                        printf("achat avec succes .\n");
+    
+                    }else{
+                        printf("prix et superieur a votre solde .\n");
+                    }
                 }else{
-                    printf("prix et superieur a votre solde .\n");
+                    printf("la quantite qui tu veux et superieur a stock tu peux acheter %d.\n",produit[i].stock);
                 }
-            }else{
-                printf("le stock de cette produit et zero .\n");
-            }
-            break;
-        }   
-    }
-    if(trouve != 1){
-        printf("aucun produit avec cette nom .\n");
+                break;
+            }   
+        }
+        if(trouve != 1){
+            printf("aucun produit avec cette nom .\n");
+        }
+
     }
 }
 
 void historiquedetail(){
+    float totale =0;
     if(nbhistorique <=0 ){
         printf("aucun achat effectue .\n");
     }else{
@@ -94,6 +113,9 @@ void historiquedetail(){
             printf("le nom de produits est :%s\n",historique[i].produit);
             printf("le prix de cette produit est %.2f .\n",historique[i].prix);
             printf("-------------------------------------------------------\n");
+            totale +=historique[i].prix;
         } 
+        printf("totale des achats :%.2f\n",totale);  
     }
 }
+
