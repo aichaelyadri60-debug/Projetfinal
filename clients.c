@@ -8,16 +8,24 @@ struct Historiques historique[100];
 int nbhistorique = 0;
 
 void ajoutclient(){
-    client[0].id=1;
-    printf("entrer le nom de cette client :");
-    scanf(" %[^\n]",client[0].nom);
-    printf("entrer prenom de cette client :");
-    scanf(" %[^\n]",client[0].prenom);
-    client[0].solde=0.0;
-    sprintf(client[0].email,"%s.%s@gmail.com",client[0].prenom ,client[0].nom);
-    printf("client ajouter avec succes\n");
+    if(client[0].id ==1){
+        printf("le client est deja enregistrer\n");
+    }else{
+        client[0].id=1;
+        printf("entrer le nom de cette client :");
+        scanf(" %[^\n]",client[0].nom);
+        printf("entrer prenom de cette client :");
+        scanf(" %[^\n]",client[0].prenom);
+        client[0].solde=0.0;
+        sprintf(client[0].email,"%s.%s@client.com",client[0].prenom ,client[0].nom);
+        printf("client ajouter avec succes\n");
+
+    }
 }
 void afficherclient(){
+    if(client[0].id ==1){
+        printf("le client est deja enregistrer\n");
+    }else{
     printf("=========================================\n");
     printf("ID          :%d.\n",client[0].id);
     printf("NOM         :%s.\n",client[0].nom);
@@ -25,13 +33,18 @@ void afficherclient(){
     printf("email       :%s\n",client[0].email);
     printf("SOLDE       :%.2f.\n",client[0].solde);
     printf("=========================================\n");
+    }
 }
 void modificationclient(){
+    if(client[0].id ==1){
+        printf("le client est deja enregistrer\n");
+    }else{
     printf("Entrer nom :");
     scanf(" %[^\n]",client[0].nom);
     printf("Entrer prenom de :");
     scanf(" %[^\n]",client[0].prenom);
-    sprintf(client[0].email,"%s.%s@gmail.com",client[0].prenom ,client[0].nom);
+    sprintf(client[0].email,"%s.%s@client.com",client[0].prenom ,client[0].nom);
+    }
 }
 
 void affichesolde(){
@@ -72,7 +85,7 @@ void acheter(){
     }else{
         printf("entrer le nom de produit qui tu veux acheter :");
         scanf(" %[^\n]",nom);
-        printf("quanbien des produits tu veux :");
+        printf("combien des produits tu veux :");
         scanf("%d",&quantite);
         for(int i=0;i<nbproduits;i++){
             if(strcmp(produit[i].nomP , nom)==0){

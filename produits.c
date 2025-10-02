@@ -157,14 +157,14 @@ void detailproduit(){
     scanf("%d",&nombre);
     for(int i=0 ;i<nbproduits;i++){
         if(produit[i].idproduit == nombre){
-          printf("=========================================");
+          printf("=========================================\n");
           printf("ID          :%d.\n",produit[i].idproduit);
           printf("NOM         :%s.\n",produit[i].nomP);
           printf("CATEGORIE   :%s.\n",produit[i].categorie);
           printf("PRIX        :%.2f DH.\n",produit[i].prix);
           printf("STOCK       : %d.\n",produit[i].stock);
           printf("DESCRIPTION :%s.\n",produit[i].description);
-          printf("=========================================");
+          printf("=========================================\n");
           trouve = 1;
           break;
         }
